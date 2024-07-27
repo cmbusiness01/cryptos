@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #69e6d5;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: darkblue;
+            color: white;
+            padding: 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5em 1em;
+        }
+        .navbar a:hover {
+            background-color: white;
+            color: darkblue;
+        }
+        .container {
+            padding: 2em;
+        }
+        .form-group {
+            margin-bottom: 1em;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5em;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.5em;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            padding: 0.5em 1em;
+            background-color: darkblue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: white;
+            color: darkblue;
+        }
+    </style>
+    <script>
+        let userData = null;
+
+        function register(event) {
+            event.preventDefault();
+            const fullName = document.getElementById('fullName').value;
+            const username = document.getElementById('username').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            userData = { fullName, username, phone, email, password };
+            alert('Inscription réussie. Connectez-vous pour effectuer des opérations d\'achat et de vente.');
+            document.getElementById('registrationForm').reset();
+            document.getElementById('registrationSection').style.display = 'none';
+            document.getElementById('loginSection').style.display = 'block';
+        }
+
+        function login(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (userData && email === userData.email && password === userData.password) {
+                alert('Connexion réussie.');
+                window.location.href='page accueil.html';// redirige vers la page d'achat
+            } else {
+                alert('Échec de la connexion. Vérifiez vos informations.');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <a href="#">CM BUSINESS</a>
+        </div>
+        <div class="nav-links">
+            <a href="#registrationSection">Inscription</a>
+            <a href="#loginSection">Connexion</a>
+        
+        </div>
+    </div>
+    <div class="container">
+        <div id="registrationSection">
+            <h2>Inscription</h2>
+            <form id="registrationForm" onsubmit="register(event)">
+                <div class="form-group">
+                    <label for="fullName">Nom Complet:</label>
+                    <input type="text" id="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="username">Nom d'utilisateur:</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Téléphone:</label>
+                    <input type="number" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mot de passe:</label>
+                    <input type="password" id="password" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">S'inscrire</button>
+                </div>
+            </form>
+        </div>
+        <div id="loginSection" style="display:none;">
+            <h2>Connexion</h2>
+            <form id="loginForm" onsubmit="login(event)">
+                <div class="form-group">
+                    <label for="loginEmail">E-mail:</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Mot de passe:</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Se Connecter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
